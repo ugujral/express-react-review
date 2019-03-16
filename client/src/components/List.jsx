@@ -33,6 +33,14 @@ class List extends Component {
   }
 
   postTodo(todo) {
+    axios
+      .post('/api', { todo })
+      .then((response) => {
+        this.setState({
+          todos: response.data,
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   deleteTodo(index) {

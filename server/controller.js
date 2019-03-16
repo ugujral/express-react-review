@@ -5,7 +5,11 @@ const controller = {
     res.status(200).send(todoList);
   },
   post: (req, res) => {
-    res.send('hello from post');
+    const { todo } = req.body;
+    if (todo !== '') {
+      todoList.push(todo);
+    }
+    res.status(201).send(todoList);
   },
   delete: (req, res) => {
     res.send('hello from delete');
