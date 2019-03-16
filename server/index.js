@@ -10,4 +10,10 @@ const port = 3000;
 server.use(morgan('dev'));
 server.use(bodyParser.json());
 
+server.use('/', express.static(path.join(__dirname, '/../client/dist')));
+
+server.get('/name', (req, res) => {
+  res.send('Yongsoo');
+});
+
 server.listen(port, () => console.log(`Connected to port ${port}!`));
