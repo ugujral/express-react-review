@@ -8,7 +8,7 @@ class List extends Component {
     super(props);
     this.state = {
       todo: '',
-      todos: ['eat', 'sleep', 'code'],
+      todos: [],
     };
     this.getTodos = this.getTodos.bind(this);
     this.postTodo = this.postTodo.bind(this);
@@ -44,6 +44,14 @@ class List extends Component {
   }
 
   deleteTodo(index) {
+    axios
+      .delete('/api', { params: { index } })
+      .then((response) => {
+        this.setState({
+          todos: response.data,
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   handleChange(event) {

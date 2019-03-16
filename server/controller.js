@@ -1,4 +1,4 @@
-const todoList = ['one', 'two', 'three'];
+const todoList = [];
 
 const controller = {
   get: (req, res) => {
@@ -12,7 +12,9 @@ const controller = {
     res.status(201).send(todoList);
   },
   delete: (req, res) => {
-    res.send('hello from delete');
+    const { index } = req.query;
+    todoList.splice(index, 1);
+    res.status(202).send(todoList);
   },
 };
 
