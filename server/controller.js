@@ -1,6 +1,8 @@
+const todoList = ['one', 'two', 'three'];
+
 const controller = {
   get: (req, res) => {
-    res.send('hello from get');
+    res.status(200).send(todoList);
   },
   post: (req, res) => {
     res.send('hello from post');
