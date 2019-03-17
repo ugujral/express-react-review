@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import ListEntry from './ListEntry';
 
@@ -7,7 +8,7 @@ class List extends Component {
     super(props);
     this.state = {
       todo: '',
-      todos: ['eat', 'sleep', 'code'],
+      todos: [],
     };
     this.getTodos = this.getTodos.bind(this);
     this.postTodo = this.postTodo.bind(this);
@@ -21,12 +22,38 @@ class List extends Component {
   }
 
   getTodos() {
+    axios
+      .get('./api')
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          todos: response.data,
+        });
+      })
+      .catch(err => console.error(err));
+
   }
 
   postTodo(todo) {
+    axios
+      .post('/api', { todo })
+      .then((response) => {
+        this.setState({
+          todos: response.data,
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   deleteTodo(index) {
+    axios
+      .delete('/api', { params: { index} })
+      .then((response) => {
+        this.setState({
+          todos: response.data,
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   handleChange(event) {
